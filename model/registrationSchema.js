@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-
+const userValidation=require('../validation/userValidation');
 
 const userSchema=new mongoose.Schema({
     name:{
@@ -26,18 +26,8 @@ const userSchema=new mongoose.Schema({
         }
 
       },
-      confirmPassword: {
-        type: String,
-        required: true,
-        maxlength:250,
-        trim:true,
-        isStrongPassword:{
-          minlength:8,
-          minLowercase:1,
-          minNumber:1,
-          minUppercase:1
-        }
-      },
+    
+      
       profilePic: {
         type:String,
         required:true
@@ -54,11 +44,11 @@ const userSchema=new mongoose.Schema({
       },
       gender:{
         type:String,
-        enum:[male,female,other],
+        enum:["male","female","other"],
         required:true
       }
 })
 
-const user = new mongoose.model("user",userSchema);
+const User = new mongoose.model("user",userSchema);
 
-module.exports=user;
+module.exports=User;

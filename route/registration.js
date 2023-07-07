@@ -1,11 +1,10 @@
+
+
 const express=require('express');
-const users =require('../model/registrationSchema');
-const db=require('../startup/db');
+const bcrypt=require('bcrypt');
+const registrationController=require('../controller/registrationRoute');
 const router=express.Router();
 
-
-router.post('/',async(req,res)=>{
-
-})
+router.post('/adduser',registrationController.registration);
 
 module.exports=router;

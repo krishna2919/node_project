@@ -1,12 +1,15 @@
 const express=require('express');
 const path=require('path');
-const db=require('./db/db');
-const user=require('./model/user');
-const router=require('./route/route');
+const db=require('./startup/db')();
+const bcrypt=require('bcrypt');
+var bodyParser = require('body-parser');
 const app = express();
-const PORT = 3000;
 
-app.use('/api',router);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+const PORT = 3000;
+require('./startup/routes')(app);
+
 
 app.listen(PORT, (error) =>{
 	if(!error)
