@@ -1,5 +1,5 @@
 
-const categoryController=require('../controller/categoryController');
+const categoryapi=require('../controller/categoryapi');
 const express=require('express');
 const upload=require('../helper/upload');
 const  router=express.Router();
@@ -7,8 +7,8 @@ const auth=require('../helper/auth');
 
 
 
-router.post('/addCategory',auth.verifyToken,upload.single('categoryimage'),categoryController.addCategory);
-router.get('/viewCategory',auth.verifyToken,categoryController.viewAllCategory);
-router.post('/updateCategory/:id',auth.verifyToken,upload.single('categoryimage'),categoryController.update);
-router.post('/deleteCategory/:ids',auth.verifyToken,categoryController.deleteCategory);
+router.post('/addCategory',auth.verifyToken,upload.single('categoryimage'),categoryapi.addCategory);
+router.get('/viewCategory',auth.verifyToken,categoryapi.viewAllCategory);
+router.post('/updateCategory/:id',auth.verifyToken,upload.single('categoryimage'),categoryapi.update);
+router.delete('/deleteCategory/:ids',auth.verifyToken,categoryapi.deleteCategory);
 module.exports=router;

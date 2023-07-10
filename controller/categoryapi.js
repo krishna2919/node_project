@@ -77,4 +77,15 @@ module.exports.update=async(req,res)=>{
 
 module.exports.deleteCategory=async(req,res)=>{
     console.log('delete');
+    const categoryIDs = req.query.categoryIDs.split(',');
+
+    try {
+      // Delete the categories by their IDs
+      await Category.deleteMany({ _id: { $in: categoryIDs } });
+  
+      res.send('Categories deleted successfully');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error deleting categories');
+    }
 }
