@@ -23,6 +23,25 @@ profilepic:{
     trim:true,
     unique:true
  },
+ password:{
+   type:String,
+   required:true,
+   trim:true,
+   maxlength:250,
+   isStrongPassword: {
+     minLength: 8,
+     minLowercase: 1,
+     minUppercase: 1,
+     minNumbers: 1
+ },
+},
+confirm_password:{
+   type:String,
+   required:true,
+   trim:true,
+   minlength:8,
+   maxlength:250
+},
  address:{
     type:String,
     required:true,
@@ -40,25 +59,7 @@ profilepic:{
     enum:['female','male','other'],
     lowercase:true
  },
- password:{
-    type:String,
-    required:true,
-    trim:true,
-    maxlength:250,
-    isStrongPassword: {
-      minLength: 8,
-      minLowercase: 1,
-      minUppercase: 1,
-      minNumbers: 1
-  },
- },
- confirm_password:{
-    type:String,
-    required:true,
-    trim:true,
-    minlength:8,
-    maxlength:250
- }
+
 });
 
 const User=mongoose.model('Registration',registrationSchema);
