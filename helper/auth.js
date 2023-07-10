@@ -8,16 +8,16 @@ const genrateToken=(req,res,next)=>{
 }
 
 const verifyToken=(req,res,next)=>{
-    const token_value=req.header('x-token');
-    if(token_value==undefined)
+    const tokenvalue=req.header('x-token');
+    if(tokenvalue==undefined)
     {
-        res.send('access denied...');
+        res.send('token access is not allowed...');
     }
     try
     {
-        const verify=jwt.verify(token_value,config.get('jwtPrivateKey'));
-        console.log(verify);
-        req.user=verify;
+        const verifytoken=jwt.verify(token_value,config.get('jwtPrivateKey'));
+        console.log(verifytoken);
+        req.user=verifytoken;
         next();
     }
     catch(ex)

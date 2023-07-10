@@ -9,7 +9,7 @@ function addCategoryValidation(user_val)
             'any.required': `"categoryimage" is a required field`
            }),
         categoryname:Joi.string().required().messages({
-            'string.base': `"categoryname" should be a type of 'text'`,
+            'string.base': `"categoryname" should be a tyepe of text'`,
             'string.empty': `"categoryname" cannot be an empty field`,
             'any.required': `"categoryname" is a required field..`
            })

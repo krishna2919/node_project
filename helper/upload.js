@@ -21,7 +21,7 @@ const upload = multer({
         }
         else
         {
-            console.log('only jpg and png file supported..');
+            console.log('please valid iamge..');
             callback(null,false);
         }
     },
@@ -29,4 +29,4 @@ const upload = multer({
         fileSize:1024*1024*2
     }
 });
-module.exports=upload
+module.exports=upload;

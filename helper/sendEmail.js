@@ -12,17 +12,17 @@ let transport = nodemailer.createTransport({
     }
 });
 
-const OTPsend = (email, otp) => {
-    let mailDetail = {
+const Otp= (email, otp) => {
+    let mailDescription = {
         to: email,
-        subject: "OTP for new Password",
-        html: "<h3>OTP for new password is </h3>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>" // html body
+        subject: " your OTP for new Password",
+        html: "<h3>your OTP for new password is </h3>" + "<h1 '>" + otp + "</h1>" 
     }
-    return transport.sendMail(mailDetail, function (error, res) {
+    return transport.sendMail(mailDescription, function (error, res) {
         if (error) throw error;
         console.log('email has been sent');
     })
 
 };
 
-module.exports = {OTPsend}
+module.exports = {Otp}

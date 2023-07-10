@@ -1,6 +1,12 @@
 const validate=require('../validation/categoryValidation');
 const {Category}=require('../models/category');
+const express = require('express');
+const app=express();
+const dbConnect=require('../startup/db');
 
+
+
+//add category
 module.exports.addCategory=async (req,res) =>{
     console.log(req.body);
     const {error}=validate.addCategoryValidation(req.body);
@@ -26,10 +32,17 @@ module.exports.addCategory=async (req,res) =>{
         res.send(category);
     }
 }
+
+
+
+//view category
 module.exports.viewAllCategory=async(req,res)=>{
-    const showCategory = await Category.find();
-    res.send(showCategory);
+    const viewCategory = await Category.find();
+    res.send(viewCategory);
 }
+
+
+//category update
 
 module.exports.update=async(req,res)=>{
     
@@ -75,17 +88,25 @@ module.exports.update=async(req,res)=>{
 
 }
 
-module.exports.deleteCategory=async(req,res)=>{
-    console.log('delete');
-    const categoryIDs = req.query.categoryIDs.split(',');
 
-    try {
-      // Delete the categories by their IDs
-      await Category.deleteMany({ _id: { $in: categoryIDs } });
-  
-      res.send('Categories deleted successfully');
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Error deleting categories');
-    }
+
+//category delete
+module.exports.deleteCategory=async(req,res)=>{
+
+
+    let id = req.params.id;
+    console.log(id);
+
+//   try {
+//     await client.connect();    
+//     const db = client.db(dbName);
+//         const collection = db.collection('categories');
+
+//         // Delete multiple records
+//         const result = await collection.deleteMany({_id:req.params.id});
+    
+//         console.log(`${result.deletedCount} records deleted successfully`);
+//       } catch (error) {
+//         console.error('Error deleting multiple records:', error);
+//       } 
 }
