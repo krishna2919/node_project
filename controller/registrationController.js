@@ -11,14 +11,17 @@ const validation=require('../validation/registrationValidation');
 const {OTPsend}=require('../helper/sendEmail');
 let otp =Math.floor(Math.random() *100000+1);
 
-module.exports.registration=async (req,res)=>{
+
+
+//for add user
+module.exports.adduser=async (req,res)=>{
     console.log(req.body);
     const {error}=validation.registrationValidation(req.body);
     if(error) 
     {
         return res.status(400).send(error.details[0].message);
     }
-    // Check if this user already exisits
+    
     let user = await User.findOne({ email: req.body.email });
     if (user) 
     {
@@ -51,7 +54,9 @@ module.exports.registration=async (req,res)=>{
 }
 
 
-module.exports.login=async(req,res)=>{
+
+//for login user
+module.exports.loginuser=async(req,res)=>{
     const {error}=validation.loginValidation(req.body);
     if(error) 
     {
@@ -72,7 +77,26 @@ module.exports.login=async(req,res)=>{
     
    }
 
-module.exports.forgotPassword=async(req,res)=>{
+
+   //for view user
+module.exports.viewprofileuser=async(req,res)=>{
+    
+    let email=req.user.email;
+    let user = await User.findOne({ email: email });
+    if (!user) 
+    {
+        return res.status(400).send(' Enter valid email.');
+    } 
+
+     user=await User.find(user).select('-password');
+
+    res.send(user);
+
+}
+
+
+   //for get otp
+module.exports.forgotpassuser=async(req,res)=>{
     let user = await User.findOne({ email: req.body.email });
     if (!user) 
     {
@@ -90,6 +114,8 @@ module.exports.forgotPassword=async(req,res)=>{
     
 }
 
+
+//for check otp
 module.exports.checkotp=async(req,res)=>{
 
     let user = await User.findOne({ email: req.body.email });
@@ -109,7 +135,11 @@ module.exports.checkotp=async(req,res)=>{
     }
 
 }
-module.exports.newpassword=async(req,res)=>{
+
+
+
+//for add new password
+module.exports.newpassworduser=async(req,res)=>{
     const {error}=validation.newPasswordValidation(req.body);
     if(error) 
     {
@@ -139,20 +169,9 @@ module.exports.newpassword=async(req,res)=>{
     }
 }
 
-module.exports.viewprofile=async(req,res)=>{
-    
-    let email=req.user.email;
-    let user = await User.findOne({ email: email });
-    if (!user) 
-    {
-        return res.status(400).send(' Enter valid email.');
-    } 
 
-     user=await User.find(user).select('-password');
 
-    res.send(user);
-
-}
+//for resetpassword  user
 
 module.exports.resetpassword=async(req,res)=>{
     
@@ -191,7 +210,10 @@ module.exports.resetpassword=async(req,res)=>{
     
 }
 
-module.exports.updateprofile=async(req,res)=>{
+
+//for update profile user
+
+module.exports.updateprofileuser=async(req,res)=>{
     console.log('req',req);
     let email=req.user.email;
     let user = await User.findOne({ email: email });
@@ -221,7 +243,7 @@ module.exports.updateprofile=async(req,res)=>{
             }
             const userUpdate = await User.updateOne({ email }, updateData);
             if(userUpdate) {
-                console.log('data successfully');
+                console.log();
             }
             res.send("profile updated...");
     }

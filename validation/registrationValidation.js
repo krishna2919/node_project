@@ -15,11 +15,11 @@ function registrationValidation(user_val)
          'any.required': `"name" is a required field`
         }),
 
-        email:Joi.string().min(11).max(50).required().email().messages({
+        email:Joi.string().required().email().messages({
          'string.empty': `"email" cannot be an empty field`,
          'any.required': `"email" is a required field`
         }),
-        address:Joi.string().min(10).max(50).required().messages({
+        address:Joi.string().required().messages({
          'string.base': `"address" should be a type of 'text'`,
          'string.empty': `"address" cannot be an empty field`,
          'any.required': `"address" is a required field`
@@ -38,10 +38,7 @@ function registrationValidation(user_val)
          'string.min': `"password" should have a minimum length of 8 `,
          'any.required': `"password" is a required field`
         }),
-      //   confirm_password:Joi.ref('password').required().messages({
-      //    'string.base': `"password" should contain atleast 1 uppercase,1 lowercase,1 digit'`,
-
-      //   }),
+    
         confirm_password:Joi.valid(Joi.ref('password')).required().messages({
              'string.base': `"confirm password" and password should be same'`,
          })
@@ -126,11 +123,11 @@ function updateProfileValidation(user_val)
      'any.required': `"name" is a required field`
     }),
 
-    email:Joi.string().min(11).max(50).required().email().messages({
+    email:Joi.string().required().email().messages({
      'string.empty': `"email" cannot be an empty field`,
      'any.required': `"email" is a required field`
     }),
-    address:Joi.string().min(10).max(50).required().messages({
+    address:Joi.string().required().messages({
      'string.base': `"address" should be a type of 'text'`,
      'string.empty': `"address" cannot be an empty field`,
      'any.required': `"address" is a required field`

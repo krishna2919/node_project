@@ -1,5 +1,5 @@
 const validate=require('../validation/categoryValidation');
-const {Category}=require('../models/category_model');
+const {Category}=require('../models/category');
 
 module.exports.addCategory=async (req,res) =>{
     console.log(req.body);
@@ -26,12 +26,12 @@ module.exports.addCategory=async (req,res) =>{
         res.send(category);
     }
 }
-module.exports.listAllCategory=async(req,res)=>{
+module.exports.viewAllCategory=async(req,res)=>{
     const showCategory = await Category.find();
     res.send(showCategory);
 }
 
-module.exports.updateCategory=async(req,res)=>{
+module.exports.update=async(req,res)=>{
     
    
     let id = req.params.id;

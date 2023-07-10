@@ -8,10 +8,9 @@ function addCategoryValidation(user_val)
             'string.empty': `"categoryimage" cannot be an empty field`,
             'any.required': `"categoryimage" is a required field`
            }),
-        categoryname:Joi.string().min(3).max(30).required().messages({
+        categoryname:Joi.string().required().messages({
             'string.base': `"categoryname" should be a type of 'text'`,
             'string.empty': `"categoryname" cannot be an empty field`,
-            'string.min': `"categoryname" should have a minimum length of 3`,
             'any.required': `"categoryname" is a required field..`
            })
     });

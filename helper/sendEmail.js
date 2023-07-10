@@ -4,8 +4,8 @@ const nodemailer = require("nodemailer");
 
 let transport = nodemailer.createTransport({
     service: 'Gmail',
-    secure: false,//true
-    port: 25,//465
+    secure: false,
+    port: 25,
     auth: {
         user: 'krishnapethani.shivinfotech@gmail.com',
         pass: 'bwysmpgqizedcljw'
