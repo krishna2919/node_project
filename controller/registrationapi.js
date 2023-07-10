@@ -8,7 +8,7 @@ const upload=require('../helper/upload');
 const  router=express.Router();
 const genrateToken=require('../helper/auth');
 const validation=require('../validation/registrationValidation');
-const {OTPsend}=require('../helper/sendEmail');
+const {OTPsend}=require('../helper/otpemail');
 let otp =Math.floor(Math.random() *100000+1);
 
 
