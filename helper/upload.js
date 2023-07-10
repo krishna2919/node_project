@@ -1,46 +1,32 @@
-// const express=require('express');
-// const user=require('../model/registrationSchema');
-// const router=express.Router();
-// const registrationRoute=require('../controller/registrationRoute');
-// const validate=require('../validation/userValidation');
-// const multer=require('multer');
+const { log } = require('console');
+const multer=require('multer');
+let path = require('path');
 
-// var storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'uploads')
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, file.fieldname + '-' + Date.now())
-//     }
-// });
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/')
+    },
+    filename: (req, file, cb) => {
+        let ext=path.extname(file.originalname)
+        cb(null, Date.now()+ext)
+    }
+});
  
-// var upload = multer(
-//     { storage: storage }
-    
-//     );
- 
-
- 
- 
-// app.post('/', upload.single('image'), (req, res, next) => {
- 
-//     var obj = {
-//         name: req.body.name,
-//         desc: req.body.desc,
-//         img: {
-//             data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-//             contentType: 'image/png'
-//         }
-//     }
-//     imgSchema.create(obj)
-//     .then ((err, item) => {
-//         if (err) {
-//             console.log(err);
-//         }
-//         else {
-//             // item.save();
-//             res.redirect('/');
-//         }
-//     });
-// });
- 
+const upload = multer({ 
+    storage: storage,
+    fileFilter:function(req,file,callback){
+        if(file.mimetype=="image/png"||file.mimetype=="image/jpg"||file.mimetype=="image/jpeg")
+        {
+            callback(null,true);
+        }
+        else
+        {
+            console.log('only jpg and png file supported..');
+            callback(null,false);
+        }
+    },
+    limits:{
+        fileSize:1024*1024*2
+    }
+});
+module.exports=upload
