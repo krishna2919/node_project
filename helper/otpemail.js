@@ -15,8 +15,8 @@ let transport = nodemailer.createTransport({
 const Otp= (email, otp) => {
     let mailDescription = {
         to: email,
-        subject: " your OTP for new Password",
-        html: "<h3>your OTP for new password is </h3>" + "<h1 '>" + otp + "</h1>" 
+        subject: " here is your otp for new password",
+        html: "<h3>here is your otp for new password </h3>" + "<h1 '>" + otp + "</h1>" 
     }
     return transport.sendMail(mailDescription, function (error, res) {
         if (error) throw error;
