@@ -48,6 +48,7 @@ module.exports.update=async(req,res)=>{
     
    
     let id = req.params.id;
+    console.log(id);
 
     let category = await Category.findOne({ _id: req.params.id });
 
@@ -97,16 +98,16 @@ module.exports.deleteCategory=async(req,res)=>{
     let id = req.params.id;
     console.log(id);
 
-//   try {
-//     await client.connect();    
-//     const db = client.db(dbName);
-//         const collection = db.collection('categories');
 
-//         // Delete multiple records
-//         const result = await collection.deleteMany({_id:req.params.id});
-    
-//         console.log(`${result.deletedCount} records deleted successfully`);
-//       } catch (error) {
-//         console.error('Error deleting multiple records:', error);
-//       } 
+    const user= await Category.deleteMany(req.params.id);
+
+  if (!user) {
+    res.status(400);
+    throw new Error('category not found');
+  }
+
+ else{
+
+  res.status(200).json("all category delete..");}
+
 }

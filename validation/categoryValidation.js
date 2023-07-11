@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 const Joi=require('joi');
 
-function addCategoryValidation(user_val)
+function addCategoryValidation(user)
 {
     const schema=Joi.object({
         categoryimage:Joi.string().messages({
@@ -14,7 +14,7 @@ function addCategoryValidation(user_val)
             'any.required': `"categoryname" is a required field..`
            })
     });
-        return schema.validate(user_val);
+        return schema.validate(user);
 }
 
 

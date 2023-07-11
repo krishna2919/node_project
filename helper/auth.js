@@ -15,7 +15,7 @@ const verifyToken=(req,res,next)=>{
     }
     try
     {
-        const verifytoken=jwt.verify(token_value,config.get('jwtPrivateKey'));
+        const verifytoken=jwt.verify(tokenvalue,config.get('jwtPrivateKey'));
         console.log(verifytoken);
         req.user=verifytoken;
         next();
